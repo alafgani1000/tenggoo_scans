@@ -6,6 +6,9 @@ on:
       - 'v*' # Berjalan saat ada tag seperti v1.0.0
   workflow_dispatch: # Memungkinkan jalankan manual dari web GitHub
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest

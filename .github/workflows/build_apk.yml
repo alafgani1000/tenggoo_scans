@@ -45,18 +45,22 @@ jobs:
       - name: Get Version from Pubspec
         id: get_version
         run: |
-          VERSION=$(grep 'version: ' pubspec.yaml | sed 's/version: //')
-          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          FULL_VERSION=$(grep '^version:' pubspec.yaml | awk '{print $2}')
+          APP_VERSION="${FULL_VERSION%%+*}"
+          BUILD_NUMBER="${FULL_VERSION##*+}"
+          echo "FULL_VERSION=$FULL_VERSION" >> $GITHUB_ENV
+          echo "APP_VERSION=$APP_VERSION" >> $GITHUB_ENV
+          echo "BUILD_NUMBER=$BUILD_NUMBER" >> $GITHUB_ENV
 
       - name: Rename APK
-        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/tenggooscans-v${{ env.VERSION }}.apk
+        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/tenggooscans-v${{ env.APP_VERSION }}.apk
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: build/app/outputs/flutter-apk/tenggooscans-v${{ env.VERSION }}.apk
-          name: Release ${{ env.VERSION }}
+          files: build/app/outputs/flutter-apk/tenggooscans-v${{ env.APP_VERSION }}.apk
+          name: Release v${{ env.APP_VERSION }}
           draft: false
           prerelease: false
         env:

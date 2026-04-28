@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TenggooScans | Scan & Convert Simplified</title>
+    <meta
+      name="description"
+      content="TenggooScans is a modern Android document scanner and converter built with Flutter."
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;600&display=swap");
+
+      :root {
+        --bg: #f5f5f8;
+        --surface: #ffffff;
+        --ink: #1c1b33;
+        --muted: #6b6b8a;
+        --accent: #5c4fe5;
+        --accent-2: #8b80f8;
+        --line: #eeeef4;
+        --accent-surface: #edebfd;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(
+            circle at 10% 10%,
+            #edebfd 0%,
+            rgba(237, 235, 253, 0) 40%
+          ),
+          radial-gradient(
+            circle at 90% 20%,
+            #e3dfff 0%,
+            rgba(227, 223, 255, 0) 38%
+          ),
+          var(--bg);
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+
+      .wrap {
+        width: min(1100px, 92vw);
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 24px 0 8px;
+      }
+
+      .brand {
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.4px;
+        font-size: 1.1rem;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 28px;
+        padding: 34px 0 22px;
+        align-items: center;
+      }
+
+      h1 {
+        margin: 0 0 14px;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: clamp(2rem, 5.5vw, 4rem);
+        line-height: 1.05;
+      }
+
+      .subtitle {
+        margin: 0;
+        color: var(--muted);
+        max-width: 60ch;
+        line-height: 1.65;
+      }
+
+      .cta {
+        margin-top: 24px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 12px 20px;
+        font-weight: 600;
+        border: 1.5px solid var(--ink);
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        border-color: var(--accent);
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: #fff;
+        box-shadow: 0 10px 22px rgba(92, 79, 229, 0.28);
+      }
+
+      .btn-secondary {
+        color: var(--ink);
+        background: var(--accent-surface);
+        border-color: #d9d5fb;
+      }
+
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 20px;
+        box-shadow: 0 18px 44px rgba(92, 79, 229, 0.1);
+      }
+
+      .hero-card p {
+        margin: 0 0 10px;
+        color: var(--muted);
+      }
+
+      .stat {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.8rem;
+        margin: 0;
+      }
+
+      .features {
+        padding: 18px 0 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .feature h3 {
+        margin: 0 0 8px;
+        font-family: "Space Grotesk", sans-serif;
+      }
+
+      .feature p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .ribbon {
+        margin: 30px 0 40px;
+        border-top: 1px solid var(--line);
+        padding-top: 14px;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .dot {
+        color: var(--accent);
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: rise 0.8s ease forwards;
+      }
+
+      .delay-1 {
+        animation-delay: 0.12s;
+      }
+
+      .delay-2 {
+        animation-delay: 0.24s;
+      }
+
+      .delay-3 {
+        animation-delay: 0.36s;
+      }
+
+      @keyframes rise {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+
+        .features {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="wrap">
+      <div class="brand">TenggooScans</div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <div>
+          <h1 class="reveal">Scan cepat, rapih, dan siap kirim.</h1>
+          <p class="subtitle reveal delay-1">
+            TenggooScans membantu kamu memindai dokumen, mengubah gambar ke PDF,
+            dan mengekstrak PDF ke gambar langsung dari HP Android. Ringkas,
+            cepat, dan cocok untuk kebutuhan kerja harian.
+          </p>
+          <div class="cta reveal delay-2">
+            <a
+              class="btn btn-primary"
+              href="https://github.com/alafgani1000/tenggoo_scans/releases/latest"
+              >Download APK</a
+            >
+            <a
+              class="btn btn-secondary"
+              href="https://github.com/alafgani1000/tenggoo_scans"
+              >Lihat GitHub</a
+            >
+          </div>
+        </div>
+
+        <aside class="card hero-card reveal delay-3">
+          <p>Current Release</p>
+          <p class="stat">v1.0.0</p>
+          <p>Android document scanner built with Flutter + Google ML Kit.</p>
+        </aside>
+      </section>
+
+      <section class="features">
+        <article class="card feature reveal">
+          <h3>Smart Scanner</h3>
+          <p>
+            Deteksi tepi dokumen otomatis untuk hasil scan yang bersih dan siap
+            dipakai.
+          </p>
+        </article>
+        <article class="card feature reveal delay-1">
+          <h3>Convert Tools</h3>
+          <p>
+            Gabungkan banyak gambar jadi PDF atau pecah PDF jadi gambar
+            berkualitas tinggi.
+          </p>
+        </article>
+        <article class="card feature reveal delay-2">
+          <h3>Share Instan</h3>
+          <p>
+            Hasil scan bisa langsung dibagikan ke WhatsApp, email, atau aplikasi
+            lain.
+          </p>
+        </article>
+      </section>
+
+      <div class="ribbon">
+        <span
+          >Made for Android users who want practical document workflow.</span
+        >
+        <span
+          ><span class="dot">●</span> TenggooScans - Scan & Convert
+          Simplified</span
+        >
+      </div>
+    </main>
+  </body>
+</html>

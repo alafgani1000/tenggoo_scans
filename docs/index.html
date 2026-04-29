@@ -49,10 +49,50 @@
 
         /* --- Header --- */
         header {
-            padding: 40px 0;
+            padding: 28px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: var(--primary-surface);
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            background: var(--primary);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 9px 20px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-light);
+        }
+
+        @media (max-width: 600px) {
+            .nav-link { display: none; }
         }
 
         .logo {
@@ -374,10 +414,15 @@
 <body>
     <div class="container">
         <header>
-            <a href="#" class="logo">
+            <a href="/" class="logo">
                 <img src="icons/ic_launcher.png" alt="TenggooScans Logo" class="logo-img">
                 <span class="logo-text">TenggooScans</span>
             </a>
+            <nav>
+                <a href="privacy.html" class="nav-link">Kebijakan Privasi</a>
+                <a href="https://github.com/alafgani1000/tenggoo_scans" class="nav-link">GitHub</a>
+                <a href="https://github.com/alafgani1000/tenggoo_scans/releases/latest" class="nav-btn">Download APK</a>
+            </nav>
         </header>
 
         <main>

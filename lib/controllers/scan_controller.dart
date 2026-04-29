@@ -70,11 +70,15 @@ class ScanController extends GetxController {
       _isScanning.value = false;
       return true;
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Gagal melakukan pemindaian: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      // Jika user membatalkan scan (klik tombol X), jangan tampilkan error
+      final msg = e.toString().toLowerCase();
+      if (!msg.contains('cancel')) {
+        Get.snackbar(
+          'Error',
+          'Gagal melakukan pemindaian: $e',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
     } finally {
       _isScanning.value = false;
     }

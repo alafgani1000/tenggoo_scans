@@ -1,4 +1,4 @@
-package com.scanner.app.app_scan
+package com.scanner.app.tenggooscans
 
 import io.flutter.embedding.android.FlutterActivity
 

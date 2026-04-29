@@ -55,7 +55,10 @@ class _MainShellState extends State<_MainShell> {
           destinations: const [
             NavigationDestination(
               icon: Icon(Icons.document_scanner_outlined),
-              selectedIcon: Icon(Icons.document_scanner, color: AppTheme.primary),
+              selectedIcon: Icon(
+                Icons.document_scanner,
+                color: AppTheme.primary,
+              ),
               label: 'Scanner',
             ),
             NavigationDestination(
@@ -91,11 +94,11 @@ class _ScannerTab extends StatelessWidget {
                   Row(
                     children: [
                       Container(
-                        width: 40,
-                        height: 40,
+                        width: 35,
+                        height: 35,
                         decoration: BoxDecoration(
                           gradient: AppTheme.primaryGradient,
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(8),
                         ),
                         child: const Icon(
                           Icons.document_scanner,
@@ -105,10 +108,19 @@ class _ScannerTab extends StatelessWidget {
                       ),
                       const SizedBox(width: 12),
                       const Text(
-                        'TenggooScans',
+                        'TengGoo',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w800,
+                          color: AppTheme.textPrimary,
+                          letterSpacing: -0.5,
+                        ),
+                      ),
+                      const SizedBox(width: 5),
+                      const Text(
+                        'scanner',
+                        style: TextStyle(
+                          fontSize: 12,
                           color: AppTheme.textPrimary,
                           letterSpacing: -0.5,
                         ),
@@ -187,40 +199,44 @@ class _ScanHeroCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 24),
-          Obx(() => SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: ctrl.isScanning
-                  ? null
-                  : () async {
-                      final ok = await ctrl.startScan();
-                      if (ok) Get.to(() => const PreviewScreen());
-                    },
-              icon: ctrl.isScanning
-                  ? const SizedBox(
-                      width: 18,
-                      height: 18,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        color: AppTheme.primary,
-                      ),
-                    )
-                  : const Icon(Icons.camera_alt, size: 18),
-              label: Text(ctrl.isScanning ? 'Membuka Kamera...' : 'Mulai Pemindaian'),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.white,
-                foregroundColor: AppTheme.primary,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
+          Obx(
+            () => SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: ctrl.isScanning
+                    ? null
+                    : () async {
+                        final ok = await ctrl.startScan();
+                        if (ok) Get.to(() => const PreviewScreen());
+                      },
+                icon: ctrl.isScanning
+                    ? const SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: AppTheme.primary,
+                        ),
+                      )
+                    : const Icon(Icons.camera_alt, size: 18),
+                label: Text(
+                  ctrl.isScanning ? 'Membuka Kamera...' : 'Mulai Pemindaian',
                 ),
-                textStyle: const TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w700,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: AppTheme.primary,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  textStyle: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ),
-          )),
+          ),
         ],
       ),
     );
@@ -255,26 +271,28 @@ class _TipsCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 12),
-          ...tips.map((t) => Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(t.$1, style: const TextStyle(fontSize: 16)),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    t.$2,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: AppTheme.textSecondary,
-                      height: 1.4,
+          ...tips.map(
+            (t) => Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(t.$1, style: const TextStyle(fontSize: 16)),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      t.$2,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        color: AppTheme.textSecondary,
+                        height: 1.4,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          )),
+          ),
         ],
       ),
     );

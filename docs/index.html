@@ -92,7 +92,89 @@
         }
 
         @media (max-width: 600px) {
-            .nav-link { display: none; }
+            .menu-toggle {
+                display: flex !important;
+            }
+
+            nav {
+                display: flex;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--surface);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 24px;
+                z-index: 90;
+                padding: 40px;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                transform: translateY(-20px);
+            }
+
+            nav.active {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: all;
+                transform: translateY(0);
+            }
+
+            .nav-link {
+                display: block !important;
+                font-size: 20px;
+                font-weight: 600;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-btn {
+                width: 100%;
+                text-align: center;
+                padding: 16px;
+                font-size: 18px;
+                margin-top: 10px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 100;
+            padding: 8px;
+            border-radius: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .menu-toggle:hover {
+            background: var(--primary-surface);
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2.5px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: translateY(8.5px) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: translateY(-8.5px) rotate(-45deg);
         }
 
         .logo {
@@ -414,14 +496,19 @@
 <body>
     <div class="container">
         <header>
-            <a href="/" class="logo">
+            <a href="index.html" class="logo">
                 <img src="icons/ic_launcher.png" alt="TenggooScans Logo" class="logo-img">
                 <span class="logo-text">TenggooScans</span>
             </a>
-            <nav>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="nav-menu">
                 <a href="privacy.html" class="nav-link">Kebijakan Privasi</a>
                 <a href="https://github.com/alafgani1000/tenggoo_scans" class="nav-link">GitHub</a>
-                <a href="https://github.com/alafgani1000/tenggoo_scans/releases/latest" class="nav-btn">Download APK</a>
+                <a href="https://apkpure.com/p/com.scanner.app.tenggooscans" class="nav-btn">Download APK</a>
             </nav>
         </header>
 
@@ -432,10 +519,8 @@
                     <p>Pemindai dokumen Android modern. Deteksi tepi otomatis, kualitas tinggi, dan konversi PDF instan
                         dalam genggaman Anda.</p>
                     <div class="cta-group">
-                        <a href="https://github.com/alafgani1000/tenggoo_scans/releases/latest"
+                        <a href="https://apkpure.com/p/com.scanner.app.tenggooscans"
                             class="btn btn-primary">Download APK</a>
-                        <a href="https://github.com/alafgani1000/tenggoo_scans" class="btn btn-secondary">Lihat
-                            GitHub</a>
                     </div>
                 </div>
 
@@ -483,7 +568,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <a href="#" class="logo">
+                    <a href="index.html" class="logo">
                         <img src="icons/ic_launcher.png" alt="TenggooScans Logo" class="logo-img">
                         <span class="logo-text">TenggooScans</span>
                     </a>
@@ -493,7 +578,7 @@
                 <div class="footer-column">
                     <h4>Produk</h4>
                     <ul class="footer-links">
-                        <li><a href="https://github.com/alafgani1000/tenggoo_scans/releases/latest">Download APK</a>
+                        <li><a href="https://apkpure.com/p/com.scanner.app.tenggooscans">Download APK</a>
                         </li>
                         <li><a href="https://github.com/alafgani1000/tenggoo_scans">Source Code</a></li>
                         <li><a href="#">Fitur</a></li>
@@ -514,6 +599,25 @@
             </div>
         </div>
     </footer>
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // Close menu when clicking links
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    </script>
 </body>
 
 </html>

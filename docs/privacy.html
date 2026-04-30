@@ -35,22 +35,34 @@
 
         /* --- Header --- */
         header {
-            padding: 32px 0;
-            border-bottom: 1px solid var(--divider);
+            padding: 24px 0;
             background: var(--surface);
+            border-bottom: 1px solid var(--divider);
+            display: flex;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             text-decoration: none;
             color: var(--text-primary);
         }
 
         .logo-img {
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             border-radius: 10px;
             object-fit: contain;
         }
@@ -60,6 +72,94 @@
             font-size: 20px;
             font-weight: 800;
             letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: #EDEBFD;
+        }
+
+        .nav-btn {
+            text-decoration: none;
+            background: var(--primary);
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 9px 20px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* --- Mobile Menu --- */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 100;
+            padding: 8px;
+            border-radius: 10px;
+        }
+
+        .menu-toggle span {
+            width: 24px;
+            height: 2.5px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-toggle.active span:nth-child(1) { transform: translateY(8.5px) rotate(45deg); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; transform: translateX(-10px); }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-8.5px) rotate(-45deg); }
+
+        @media (max-width: 600px) {
+            .menu-toggle { display: flex; }
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--surface);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 24px;
+                z-index: 90;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                transform: translateY(-20px);
+                display: flex; /* Ensure flex for centering */
+            }
+            nav.active {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+            .nav-link { font-size: 18px; width: 100%; text-align: center; }
+            .nav-btn { font-size: 18px; width: 100%; text-align: center; padding: 14px; }
         }
 
         /* --- Content --- */
@@ -166,10 +266,20 @@
 <body>
     <header>
         <div class="container">
-            <a href="/" class="logo">
+            <a href="index.html" class="logo">
                 <img src="icons/ic_launcher.png" alt="TenggooScans" class="logo-img">
                 <span class="logo-text">TenggooScans</span>
             </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="nav-menu">
+                <a href="index.html" class="nav-link">Beranda</a>
+                <a href="https://github.com/alafgani1000/tenggoo_scans" class="nav-link">GitHub</a>
+                <a href="https://apkpure.com/p/com.scanner.app.tenggooscans" class="nav-btn">Download APK</a>
+            </nav>
         </div>
     </header>
 
@@ -220,7 +330,25 @@
     </main>
 
     <footer>
-        <p>&copy; 2026 TenggooScans · <a href="/">Kembali ke Beranda</a></p>
+        <p>&copy; 2026 TenggooScans · <a href="index.html">Kembali ke Beranda</a></p>
     </footer>
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        document.querySelectorAll('.nav-link, .nav-btn').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+    </script>
 </body>
 </html>
